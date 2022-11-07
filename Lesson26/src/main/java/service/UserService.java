@@ -15,7 +15,7 @@ public class UserService {
   }
 
   public List<User> findUsers() {
-    return userRepository.findUsers();
+    return userRepository.getUsers();
   }
 
   public void createUser(String login, String password) {

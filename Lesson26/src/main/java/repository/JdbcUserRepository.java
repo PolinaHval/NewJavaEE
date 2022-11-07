@@ -20,15 +20,14 @@ public class JdbcUserRepository implements UserRepository {
   }
 
   @Override
-  public List<User> findUsers() {
+  public List<User> getUsers() {
     try {
       Statement statement = connection.createStatement();
       String sql = "select login, password from users";
       ResultSet rs = statement.executeQuery(sql);
       final List<User> users = new ArrayList<>();
       while (rs.next()) {
-        final User user = new User(rs.getString("login"), rs.getString("password"));
-        users.add(user);
+        users.add(build(rs));
       }
       return users;
     } catch (SQLException e) {
@@ -49,7 +48,7 @@ public class JdbcUserRepository implements UserRepository {
     }
   }
 
-  public User build(ResultSet resultSet) throws SQLException {
+  private User build(ResultSet resultSet) throws SQLException {
     return new User(resultSet.getString("login"), resultSet.getString("password"));
   }
 

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet("/loginUser")
+@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
   private UserService userService;
 
@@ -32,10 +32,11 @@ public class LoginServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     final String login = request.getParameter("login");
+    final String password = request.getParameter("password");
 
     Optional<User> user = userService.getUser(login);
 
-    if (user.isPresent()) {
+    if (user.isPresent() && user.get().getPassword().equals(password)) {
       request.getSession().setAttribute("loggedIn", true);
       response.sendRedirect("users");
     } else {

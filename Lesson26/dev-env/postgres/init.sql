@@ -1,7 +1,7 @@
-CREATE TABLE users
+CREATE TABLE user
 (
-    login VARCHAR NOT NULL UNIQUE,
-    password VARCHAR NOT NULL UNIQUE
+    login    VARCHAR NOT NULL UNIQUE,
+    password VARCHAR NOT NULL
 );
 
 INSERT INTO users (login, password)

@@ -12,32 +12,6 @@
     <artifactId>Lesson26</artifactId>
     <packaging>war</packaging>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-api</artifactId>
-                <version>5.9.1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>1.7.36</version>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.platform</groupId>
-                <artifactId>junit-platform-commons</artifactId>
-                <version>1.9.1</version>
-            </dependency>
-            <dependency>
-                <groupId>net.bytebuddy</groupId>
-                <artifactId>byte-buddy</artifactId>
-                <version>1.12.14</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
@@ -146,11 +120,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-surefire-plugin</artifactId>-->
-            <!--                <version>3.0.0-M7</version>-->
-            <!--            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
@@ -197,37 +166,6 @@
                         <goals>
                             <goal>check</goal>
                         </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>1.4.1</version>
-                <executions>
-                    <execution>
-                        <id>no-duplicate-declared-dependencies</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <banDuplicatePomDependencyVersions/>
-                                <dependencyConvergence/>
-                                <bannedDependencies>
-                                    <excludes>
-                                        <!-- This should not exist as it will force SLF4J calls to be delegated to log4j -->
-                                        <exclude>org.slf4j:slf4j-log4j12</exclude>
-                                        <!-- This should not exist as it will force SLF4J calls to be delegated to jul -->
-                                        <exclude>org.slf4j:slf4j-jdk14</exclude>
-                                        <!--                                        &lt;!&ndash; Ensure only the slf4j binding for logback is on the classpath &ndash;&gt;-->
-                                        <exclude>log4j:log4j</exclude>
-                                        <!--                                         As recommended from the slf4j guide, exclude commons-logging -->
-                                        <exclude>commons-logging:commons-logging</exclude>
-                                    </excludes>
-                                </bannedDependencies>
-                            </rules>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
